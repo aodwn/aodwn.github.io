@@ -421,7 +421,7 @@
     <!-- 네비게이션 바 -->
     <nav class="navbar" id="navbar">
         <a href="#" class="logo">
-            <span class="logo-dot"></span> Portf<span style="color:var(--text-secondary)">olio</span>
+            <span class="logo-dot"></span> Portfolio
         </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home">Home</a></li>
@@ -549,9 +549,9 @@
 
             update() {
                 // z축을 줄여서 앞으로 오는 듯한(Warp) 효과, 혹은 천천히 흘러가는 효과
-                // 여기서는 매우 부드럽고 고급스러운 '은은한 흐름'을 위해 y축(위로)과 깊이만 살짝 변경
-                this.y -= 0.2 * (this.radius); // 크기가 큰(가까운) 별이 조금 더 빨리 이동
-                this.x -= 0.1 * (this.radius);
+                // 좀 더 역동적인 속도감을 위해 상승 계수 조절
+                this.y -= 1.2 * (this.radius);
+                this.x -= 0.6 * (this.radius);
 
                 // 마우스 인터랙션 (마우스를 따라 살짝 끌려오는 효과)
                 if (mouse.x !== null) {
@@ -582,14 +582,8 @@
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
 
-                // 일부 별은 희미하게 색상을 띔
-                if (this.radius > 1.8) {
-                    ctx.fillStyle = `rgba(139, 92, 246, ${this.alpha})`; // 보라색 빛
-                } else if (this.radius > 1.2) {
-                    ctx.fillStyle = `rgba(59, 130, 246, ${this.alpha})`; // 파란색 빛
-                } else {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`; // 흰색 통상 별
-                }
+                // 색상이 따로 놀지 않도록 푸른빛이 감도는 고급스러운 '아이스 화이트' 단색으로 통일
+                ctx.fillStyle = `rgba(226, 232, 255, ${this.alpha})`;
 
                 ctx.fill();
             }
