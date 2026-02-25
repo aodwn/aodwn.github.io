@@ -1,3 +1,34 @@
-title: 새싹 용산
-description: Jekyll로 만든 블로그
-theme: jekyll-theme-hacker
+# Site settings
+title: Portfolio | Infrastructure & System Engineering
+email: your-email@example.com
+description: >-
+  Infrastructure & System Engineering Portfolio. 
+  Focusing on Linux, Cloud, IaC, and System Automation.
+baseurl: "" # GitHub Pages 저장소 이름이 'username.github.io'가 아닐 경우 '/repository-name' 입력
+url: "https://your-id.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+
+# Project Data (Custom fields)
+user_info:
+  name: "System Engineer"
+  role: "Infrastructure & Cloud Specialist"
+  location: "Seoul, South Korea"
+  github: "https://github.com/your-id"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
