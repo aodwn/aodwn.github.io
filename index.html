@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World - Modern Aesthetics</title>
+    <title>Portfolio - Premium Space</title>
+    <!-- Google Fonts: 텍스트에 더욱 우아하고 현대적인 느낌을 줍니다 -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700&display=swap"
+        rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap');
-
         :root {
-            --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-1: #3b82f6;
-            --accent-2: #8b5cf6;
+            --bg-deep: #030014;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --accent-1: #8b5cf6;
+            /* Purple */
+            --accent-2: #3b82f6;
+            /* Blue */
             --accent-3: #ec4899;
+            /* Pink */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
 
         * {
@@ -25,231 +31,572 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-deep);
             color: var(--text-primary);
-            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* 스크롤바 커스텀 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* 배경 우주 캔버스 */
+        #space-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --------------------------
+           Navigation Bar (리스트바)
+        -------------------------- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            overflow: hidden;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(3, 0, 20, 0.2);
+            border-bottom: 1px solid transparent;
+        }
+
+        .navbar.scrolled {
+            padding: 1rem 5%;
+            background: rgba(3, 0, 20, 0.8);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--accent-1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
             position: relative;
         }
 
-        /* Animated Background Orbs */
-        .orb {
+        .nav-links li a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links li a::after {
+            content: '';
             position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: 0;
-            animation: float 20s infinite ease-in-out alternate;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, var(--accent-2), var(--accent-1));
+            transition: width 0.3s ease;
         }
 
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(59, 130, 246, 0.4);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
+        .nav-links li a:hover::after {
+            width: 100%;
         }
 
-        .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: rgba(139, 92, 246, 0.3);
-            bottom: -150px;
-            right: -100px;
-            animation-delay: -5s;
-        }
-        
-        .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: rgba(236, 72, 153, 0.3);
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: -10s;
+        /* 모바일 햄버거 메뉴 버튼 (임시) */
+        .menu-btn {
+            display: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
-
-        /* Glassmorphism Card */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 3rem 4rem;
+        /* --------------------------
+           Hero Section (메인 소개)
+        -------------------------- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            z-index: 10;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            transform: translateY(0);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-width: 90%;
-            width: 500px;
+            padding: 0 5%;
+            position: relative;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
-            border-color: rgba(255, 255, 255, 0.2);
+        .hero-badge {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(5px);
+            animation: fadeInDown 1s ease forwards;
+            opacity: 0;
+            transform: translateY(-20px);
         }
 
-        /* Typography */
-        h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(to right, var(--accent-1), var(--accent-2), var(--accent-3));
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.2s ease forwards;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #fff, #a1a1aa);
             -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent;
-            background-size: 200% auto;
-            animation: shine 5s linear infinite;
         }
 
+        .gradient-text-accent {
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-1), var(--accent-3));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shine 4s linear infinite;
+        }
+
+        .hero-desc {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeInUp 1s 0.4s ease forwards;
+        }
+
+        .hero-btn-group {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.6s ease forwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
+            border: none;
+            box-shadow: 0 10px 20px -10px rgba(139, 92, 246, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -10px rgba(139, 92, 246, 0.8);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: white;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* --------------------------
+           Section Layouts (스크롤 뷰)
+        -------------------------- */
+        section {
+            padding: 8rem 5%;
+            min-height: 80vh;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* Cards Layout */
+        .glass-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .glass-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .glass-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* Animations */
         @keyframes shine {
             to {
                 background-position: 200% center;
             }
         }
 
-        p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            font-weight: 300;
-            margin-bottom: 2rem;
-            letter-spacing: 0.5px;
-        }
-
-        /* Interactive Button */
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: white;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: all 0.5s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4);
-        }
-        
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        /* Subtle Reveal Animation */
-        .reveal {
-            opacity: 0;
-            animation: fadeInReveal 1s ease forwards;
-        }
-
-        .reveal-delay-1 { animation-delay: 0.2s; }
-        .reveal-delay-2 { animation-delay: 0.4s; }
-        .reveal-delay-3 { animation-delay: 0.6s; }
-
-        @keyframes fadeInReveal {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-    </style>
-</head>
-<body>
 
-    <!-- Background Effects -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
 
-    <!-- Main Content -->
-    <div class="card reveal">
-        <h1 class="reveal reveal-delay-1">Hello World</h1>
-        <p class="reveal reveal-delay-2">Welcome to the future of web design.</p>
-        <button class="btn reveal reveal-delay-3" onclick="createParticle(event)">Explore</button>
-    </div>
-
-    <script>
-        // Simple interactive particle effect on button click
-        function createParticle(e) {
-            const btn = e.currentTarget;
-            const rect = btn.getBoundingClientRect();
-            
-            for(let i=0; i<10; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                // Random position around click
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                particle.style.cssText = `
-                    position: absolute;
-                    width: ${Math.random() * 8 + 4}px;
-                    height: ${Math.random() * 8 + 4}px;
-                    background: ${Math.random() > 0.5 ? '#3b82f6' : '#ec4899'};
-                    border-radius: 50%;
-                    pointer-events: none;
-                    left: ${x}px;
-                    top: ${y}px;
-                    transition: all 0.6s cubic-bezier(0.1, 0.8, 0.3, 1);
-                    opacity: 1;
-                `;
-                
-                btn.appendChild(particle);
-                
-                // Animate outwards
-                setTimeout(() => {
-                    const angle = Math.random() * Math.PI * 2;
-                    const distance = Math.random() * 60 + 20;
-                    particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`;
-                    particle.style.opacity = '0';
-                }, 10);
-                
-                // Cleanup
-                setTimeout(() => {
-                    particle.remove();
-                }, 600);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(3, 0, 20, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s ease;
+                border-left: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .hero-btn-group {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 움직이는 우주 배경 -->
+    <canvas id="space-canvas"></canvas>
+
+    <!-- 네비게이션 바 -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="logo">
+            <span class="logo-dot"></span> Portf<span style="color:var(--text-secondary)">olio</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="menu-btn" id="menuBtn">☰</button>
+    </nav>
+
+    <!-- 메인 타이틀 섹션 (Hero) -->
+    <section class="hero" id="home">
+        <div class="hero-badge">Welcome to my universe 🚀</div>
+
+        <h1 class="hero-title">
+            <span class="gradient-text">Hello, I'm</span><br>
+            <span class="gradient-text-accent">Web Developer</span>
+        </h1>
+
+        <p class="hero-desc">
+            끝없는 우주처럼 무한한 가능성을 탐구합니다.<br>
+            아름다운 디자인과 견고한 코드로 최고의 사용자 경험을 설계하는 개발자입니다.
+        </p>
+
+        <div class="hero-btn-group">
+            <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+            <a href="#contact" class="btn btn-secondary">연락하기</a>
+        </div>
+    </section>
+
+    <!-- 소개 섹션 (예시) -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="glass-card-grid">
+            <div class="glass-card">
+                <div class="card-icon">🧠</div>
+                <h3>Creative Thinker</h3>
+                <p>단순한 코딩을 넘어, 사용자의 문제를 어떻게 아름답고 직관적으로 해결할 수 있을지 끊임없이 고민합니다. 모던 웹 디자인 트렌드를 반영하여 느낌있는 UI를 구현하는 것을 좋아합니다.
+                </p>
+            </div>
+            <div class="glass-card">
+                <div class="card-icon">⚡</div>
+                <h3>Performance First</h3>
+                <p>겉보기에만 예쁜 것이 아니라, 최적화된 로직과 가벼운 애셋을 통해 어느 기기에서나 빠르고 부드럽게 동작하도록 성능 개선에 집착합니다.</p>
+            </div>
+            <div class="glass-card">
+                <div class="card-icon">🌌</div>
+                <h3>Endless Learner</h3>
+                <p>새로운 기술의 영감은 우주의 팽창처럼 계속됩니다. 최신 프론트엔드 프레임워크와 에코시스템을 적극적으로 도입하고 학습하는 과정을 즐깁니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 추가 스크롤 여백 공간 (프로젝트/이력 등) -->
+    <section id="projects" style="min-height: 50vh; text-align: center;">
+        <h2 class="section-title">Projects & Resume</h2>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+            이곳에 글래스모피즘(Glassmorphism) 카드 형태나 슬라이더를 통해 진행했던 프로젝트와 이력을 멋지게 채워넣을 수 있습니다. 스크롤을 내리며 은은하게 빛나는 이 우주 배경과 함께
+            어우러집니다.
+        </p>
+    </section>
+
+
+    <script>
+        // --- 네비게이션 스크롤 효과 & 모바일 메뉴 ---
+        const navbar = document.getElementById('navbar');
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // 네비게이션 링크 클릭 시 모바일 메뉴 닫기
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.textContent = '☰';
+            });
+        });
+
+        // --- 🌌 고급스러운 우주 배경 애니메이션 (Canvas) ---
+        const canvas = document.getElementById('space-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let stars = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initStars();
+        }
+
+        // 별 객체 생성
+        class Star {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.z = Math.random() * width; // 깊이감(Depth) 위함
+                this.radius = Math.random() * 1.5 + 0.5;
+                // 멀리 있는 별일수록 어둡고, 가까울수록 밝게
+                this.baseAlpha = (Math.random() * 0.5) + 0.2;
+            }
+
+            update() {
+                // z축을 줄여서 앞으로 오는 듯한(Warp) 효과, 혹은 천천히 흘러가는 효과
+                // 여기서는 매우 부드럽고 고급스러운 '은은한 흐름'을 위해 y축(위로)과 깊이만 살짝 변경
+                this.y -= 0.2 * (this.radius); // 크기가 큰(가까운) 별이 조금 더 빨리 이동
+                this.x -= 0.1 * (this.radius);
+
+                // 화면 밖으로 나가면 반대쪽에서 다시 생성
+                if (this.y < 0) this.y = height;
+                if (this.x < 0) this.x = width;
+
+                // 반짝이는 효과
+                this.alpha = this.baseAlpha + Math.sin(Date.now() * 0.001 * this.radius) * 0.3;
+            }
+
+            draw() {
+                // 살짝 푸른빛/보랏빛을 섞어 우주 느낌 강조
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+
+                // 일부 별은 희미하게 색상을 띔
+                if (this.radius > 1.8) {
+                    ctx.fillStyle = `rgba(139, 92, 246, ${this.alpha})`; // 보라색 빛
+                } else if (this.radius > 1.2) {
+                    ctx.fillStyle = `rgba(59, 130, 246, ${this.alpha})`; // 파란색 빛
+                } else {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`; // 흰색 통상 별
+                }
+
+                ctx.fill();
+            }
+        }
+
+        function initStars() {
+            stars = [];
+            // 화면 크기에 비례하여 별 개수 조절
+            const numStars = Math.floor((width * height) / 4000);
+            for (let i = 0; i < numStars; i++) {
+                stars.push(new Star());
+            }
+        }
+
+        function animateSpace() {
+            // 완전히 지우지 않고 어두운 배경색을 살짝 덧칠해 꼬리(잔상)를 길게 남기는 기법
+            ctx.fillStyle = 'rgba(3, 0, 20, 0.4)';  // 테마 배경색과 동일하게
+            ctx.fillRect(0, 0, width, height);
+
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+
+            requestAnimationFrame(animateSpace);
+        }
+
+        // 초기화 및 실행
+        window.addEventListener('resize', resize);
+        resize();
+        animateSpace();
+
     </script>
 </body>
+
 </html>
