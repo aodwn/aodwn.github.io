@@ -1,34 +1,22 @@
-# Site settings
-title: Portfolio | Infrastructure & System Engineering
-email: your-email@example.com
-description: >-
-  Infrastructure & System Engineering Portfolio. 
-  Focusing on Linux, Cloud, IaC, and System Automation.
-baseurl: "" # GitHub Pages 저장소 이름이 'username.github.io'가 아닐 경우 '/repository-name' 입력
+title: "Portfolio | System Engineering"
+description: "Infrastructure & Cloud Specialist Portfolio"
+baseurl: "" 
 url: "https://your-id.github.io"
 
-# Build settings
-markdown: kramdown
-highlighter: rouge
-permalink: /:title/
+# 테마 설정
+theme: minima
+remote_theme: jekyll/minima
 
-# Project Data (Custom fields)
-user_info:
-  name: "System Engineer"
-  role: "Infrastructure & Cloud Specialist"
-  location: "Seoul, South Korea"
-  github: "https://github.com/your-id"
+# 사용자 정의 데이터
+author:
+  name: "홍길동"
+  email: "user@example.com"
+  github_username: "your-id"
 
-# Plugins
+# 빌드 설정
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-remote-theme
 
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor/bundle/
-  - vendor/cache/
-  - vendor/gems/
-  - vendor/ruby/
+exclude: [Gemfile, Gemfile.lock]
