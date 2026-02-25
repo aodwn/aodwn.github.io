@@ -1,11 +1,19 @@
-title: "Portfolio"
-description: "Infrastructure Engineering"
+title: "Infrastructure Engineer Portfolio"
+description: "System & Cloud Infrastructure Engineering"
 baseurl: ""
 url: "https://aodwn.github.io"
 
-# 테마 간섭 방지를 위해 테마 설정을 비워둡니다.
+# 테마 간섭 방지
 theme: 
 remote_theme: 
 
+# 빌드 및 인코딩
 markdown: kramdown
 encoding: "utf-8"
+highlighter: rouge
+
+# 사용자 정보
+user:
+  name: "사용자"
+  education: "서일대학교 소프트웨어공학 학사"
+  current: "SeSAC 청년취업사관학교 수료 중 (2025.12 - 2026.04)"
