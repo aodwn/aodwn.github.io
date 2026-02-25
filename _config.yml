@@ -1,10 +1,11 @@
-title: "Portfolio | System Engineering"
-description: "Infrastructure & Cloud Specialist Portfolio"
-remote_theme: pages-themes/minimal@v0.2.0
-plugins:
-  - jekyll-seo-tag
-  - jekyll-remote-theme
+title: "Portfolio"
+description: "Infrastructure Engineering"
+baseurl: ""
+url: "https://aodwn.github.io"
 
-# 한글 최적화 및 인코딩
-encoding: "utf-8"
+# 테마 간섭 방지를 위해 테마 설정을 비워둡니다.
+theme: 
+remote_theme: 
+
 markdown: kramdown
+encoding: "utf-8"
