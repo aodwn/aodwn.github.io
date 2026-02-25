@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Infrastructure & System Engineering</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap">
+    <style>
+        :root {
+            --bg-color: #0a0a0c;
+            --card-bg: #161618;
+            --accent-color: #3b82f6;
+            --text-main: #f4f4f5;
+            --text-sub: #a1a1aa;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-deep: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Responsive Layout Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--text-main);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        /* Bento Grid System */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(180px, auto);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 30px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: var(--shadow-deep);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        /* Individual Card Spans */
+        .card-large { grid-column: span 2; grid-row: span 2; }
+        .card-tall { grid-row: span 2; }
+        .card-wide { grid-column: span 2; }
+
+        /* Hero Section Customization */
+        .hero-card {
+            background: linear-gradient(135deg, #161618 0%, #1e1e20 100%);
+            justify-content: flex-end;
+        }
+
+        .hero-title { font-size: 2.5rem; line-height: 1.1; margin-bottom: 10px; }
+        .hero-subtitle { color: var(--text-sub); font-size: 1.1rem; }
+
+        /* Skill Badges */
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Experience/Project List */
+        .list-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .list-item:last-child { border-bottom: none; }
+
+        .item-title { font-weight: 600; font-size: 1.1rem; display: block; }
+        .item-date { font-size: 0.85rem; color: var(--accent-color); font-weight: 600; }
+        .item-desc { font-size: 0.9rem; color: var(--text-sub); margin-top: 5px; }
+
+        /* Contact Section */
+        .contact-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            transition: color 0.2s ease;
+        }
+
+        .contact-link:hover { color: var(--accent-color); }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .bento-grid { display: flex; flex-direction: column; }
+            .hero-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.5rem; }
+        }
+
+        /* Depth Effect Elements */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.03), transparent);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="bento-grid">
+        <div class="card card-large hero-card">
+            <h1 class="hero-title">System & Cloud<br>Infrastructure Engineer</h1>
+            <p class="hero-subtitle">가용성과 확장성을 고려한 시스템 아키텍처를 설계합니다.</p>
+        </div>
+
+        <div class="card card-tall">
+            <h3>Technical Stack</h3>
+            <div class="badge-container">
+                <span class="badge">Linux</span>
+                <span class="badge">Ansible</span>
+                <span class="badge">Terraform</span>
+                <span class="badge">Docker</span>
+                <span class="badge">Kubernetes</span>
+                <span class="badge">AWS/Azure</span>
+                <span class="badge">MySQL/MariaDB</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Contact</h3>
+            <a href="mailto:your-email@example.com" class="contact-link">Email</a>
+            <a href="https://github.com/your-id" class="contact-link">GitHub</a>
+        </div>
+
+        <div class="card">
+            <h3>Location</h3>
+            <p style="color: var(--text-sub);">Seoul, South Korea</p>
+        </div>
+    </div>
+
+    <h2 class="section-title">Professional Experience</h2>
+    <div class="bento-grid">
+        <div class="card card-wide">
+            <div class="list-item">
+                <span class="item-date">2026.01 - 현재</span>
+                <span class="item-title">SeSAC 청년취업사관학교</span>
+                <p class="item-desc">클라우드 데이터 인프라 및 시스템 엔지니어링 과정 수료 중</p>
+            </div>
+            <div class="list-item">
+                <span class="item-date">2024.01 - 2024.06</span>
+                <span class="item-title">에스넷아이씨티 R&D 부서</span>
+                <p class="item-desc">5G/LTE 핵심망 분석 및 Open5GS 오픈소스 코드 분석 프로젝트 참여</p>
+            </div>
+        </div>
+
+        <div class="card card-tall">
+            <h3>Education</h3>
+            <div class="list-item">
+                <span class="item-title">서일대학교</span>
+                <p class="item-desc">소프트웨어공학 전공 졸업</p>
+            </div>
+            <h3>Certifications</h3>
+            <div class="badge-container">
+                <span class="badge">ADsP</span>
+                <span class="badge">SQLD (준비 중)</span>
+                <span class="badge">정보처리기사 (준비 중)</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Project 01</h3>
+            <p class="item-desc">IaC 기반 인프라 자동화 구축 프로토타입</p>
+        </div>
+
+        <div class="card">
+            <h3>Project 02</h3>
+            <p class="item-desc">Lost Ark API 활용 재화 분석 대시보드</p>
+        </div>
+    </div>
+
+    <footer style="text-align: center; color: var(--text-sub); font-size: 0.8rem; margin-top: 40px;">
+        <p>&copy; 2026. All rights reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>
