@@ -1,22 +1,10 @@
 title: "Portfolio | System Engineering"
 description: "Infrastructure & Cloud Specialist Portfolio"
-baseurl: "" 
-url: "https://your-id.github.io"
-
-# 테마 설정
-theme: minima
-remote_theme: jekyll/minima
-
-# 사용자 정의 데이터
-author:
-  name: "홍길동"
-  email: "user@example.com"
-  github_username: "your-id"
-
-# 빌드 설정
+remote_theme: pages-themes/minimal@v0.2.0
 plugins:
-  - jekyll-feed
   - jekyll-seo-tag
   - jekyll-remote-theme
 
-exclude: [Gemfile, Gemfile.lock]
+# 한글 최적화 및 인코딩
+encoding: "utf-8"
+markdown: kramdown
