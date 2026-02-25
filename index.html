@@ -376,6 +376,32 @@
             }
         }
 
+        /* --- Scroll Animations (Squarespace Style) --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: opacity, transform;
+        }
+
+        .animate-on-scroll.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered transition delays for grid cards */
+        .glass-card-grid .glass-card.animate-on-scroll:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .glass-card-grid .glass-card.animate-on-scroll:nth-child(2) {
+            transition-delay: 0.3s;
+        }
+
+        .glass-card-grid .glass-card.animate-on-scroll:nth-child(3) {
+            transition-delay: 0.5s;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -456,20 +482,20 @@
 
     <!-- 소개 섹션 (예시) -->
     <section id="about">
-        <h2 class="section-title">About Me</h2>
+        <h2 class="section-title animate-on-scroll">About Me</h2>
         <div class="glass-card-grid">
-            <div class="glass-card">
+            <div class="glass-card animate-on-scroll">
                 <div class="card-icon">🧠</div>
                 <h3>Creative Thinker</h3>
                 <p>단순한 코딩을 넘어, 사용자의 문제를 어떻게 아름답고 직관적으로 해결할 수 있을지 끊임없이 고민합니다. 모던 웹 디자인 트렌드를 반영하여 느낌있는 UI를 구현하는 것을 좋아합니다.
                 </p>
             </div>
-            <div class="glass-card">
+            <div class="glass-card animate-on-scroll">
                 <div class="card-icon">⚡</div>
                 <h3>Performance First</h3>
                 <p>겉보기에만 예쁜 것이 아니라, 최적화된 로직과 가벼운 애셋을 통해 어느 기기에서나 빠르고 부드럽게 동작하도록 성능 개선에 집착합니다.</p>
             </div>
-            <div class="glass-card">
+            <div class="glass-card animate-on-scroll">
                 <div class="card-icon">🌌</div>
                 <h3>Endless Learner</h3>
                 <p>새로운 기술의 영감은 우주의 팽창처럼 계속됩니다. 최신 프론트엔드 프레임워크와 에코시스템을 적극적으로 도입하고 학습하는 과정을 즐깁니다.</p>
@@ -479,23 +505,23 @@
 
     <!-- 프로젝트 섹션 (Projects) -->
     <section id="projects" style="text-align: center;">
-        <h2 class="section-title">Projects</h2>
+        <h2 class="section-title animate-on-scroll">Projects</h2>
         <div class="glass-card-grid">
-            <div class="glass-card" style="text-align: left;">
+            <div class="glass-card animate-on-scroll" style="text-align: left;">
                 <h3 style="color: var(--accent-2);">로스트아크 오픈 API 검색기</h3>
                 <p style="margin-bottom: 2rem;">로아 OpenAPI를 연동하여 캐릭터들의 정보를 실시간으로 조회하고 다크 테마의 멋진 레이아웃으로 렌더링하도록 구현한
                     서비스입니다.</p>
                 <div style="font-size: 0.8rem; color: var(--accent-1); font-weight: 600;">#HTML #CSS #Javascript
                     #OpenAPI</div>
             </div>
-            <div class="glass-card" style="text-align: left;">
+            <div class="glass-card animate-on-scroll" style="text-align: left;">
                 <h3 style="color: var(--accent-3);">우주 배경 인터랙티브 포트폴리오</h3>
                 <p style="margin-bottom: 2rem;">HTML5 Canvas와 수학 알고리즘을 사용해 끝없이 펼쳐지는 우주와, 마우스에 반응하여 쏟아지는 별빛 인터랙션을 개발했습니다.
                 </p>
                 <div style="font-size: 0.8rem; color: var(--accent-1); font-weight: 600;">#Canvas #Responsive
                     #Glassmorphism</div>
             </div>
-            <div class="glass-card" style="text-align: left;">
+            <div class="glass-card animate-on-scroll" style="text-align: left;">
                 <h3 style="color: var(--text-primary);">To be updated...</h3>
                 <p style="margin-bottom: 2rem;">다음 프로젝트를 준비 중입니다. 저만의 아이디어를 멋진 코드와 디자인으로 엮어서 세상에 보여줄 계획입니다.</p>
                 <div style="font-size: 0.8rem; color: var(--accent-1); font-weight: 600;">#NewProject #ComingSoon</div>
@@ -505,8 +531,8 @@
 
     <!-- 연락처 섹션 (Contact) -->
     <section id="contact" style="min-height: 40vh; text-align: center; padding-bottom: 5rem;">
-        <h2 class="section-title">Contact</h2>
-        <div class="glass-card"
+        <h2 class="section-title animate-on-scroll">Contact</h2>
+        <div class="glass-card animate-on-scroll"
             style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
             <p>언제나 새로운 도전을 환영합니다. 코드 퀄리티와 사용자 경험을 높일 수 있는 새로운 문제들을 해결하고 싶습니다.</p>
             <p style="color: var(--text-secondary); margin-bottom: 1rem;">더 많은 저장소와 자세한 소스 코드는 아래 GitHub에서 확인하실 수 있습니다.
@@ -538,6 +564,27 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        // --- 스크롤 반응형 애니메이션 (Intersection Observer) ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 // 15% 정도 보였을 때 애니메이션 실행
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    // 한 번만 실행되길 원한다면 unobserve 적용 (반복을 원하면 주석 처리)
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+            observer.observe(el);
         });
 
         menuBtn.addEventListener('click', () => {
