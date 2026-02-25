@@ -345,6 +345,84 @@
             font-weight: 300;
         }
 
+        /* --- Resume Timeline --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-deep);
+            border: 2px solid var(--accent-1);
+            box-shadow: 0 0 10px var(--accent-1);
+            z-index: 2;
+        }
+
+        .timeline-item:hover::before {
+            background: var(--accent-1);
+            transform: scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--accent-2);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .timeline-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateX(10px);
+            border-color: rgba(139, 92, 246, 0.4);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .timeline-content p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
         /* Animations */
         @keyframes shine {
             to {
@@ -525,6 +603,48 @@
                 <h3 style="color: var(--text-primary);">To be updated...</h3>
                 <p style="margin-bottom: 2rem;">다음 프로젝트를 준비 중입니다. 저만의 아이디어를 멋진 코드와 디자인으로 엮어서 세상에 보여줄 계획입니다.</p>
                 <div style="font-size: 0.8rem; color: var(--accent-1); font-weight: 600;">#NewProject #ComingSoon</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 이력/경력 섹션 (Resume) -->
+    <section id="resume" style="min-height: 60vh;">
+        <h2 class="section-title animate-on-scroll">Resume & Experience</h2>
+        <div class="timeline">
+            <!-- 항목 1 -->
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-date">2026.01 - Present</div>
+                <div class="timeline-content">
+                    <h3>프론트엔드 엔지니어 (Frontend Engineer)</h3>
+                    <p>
+                        새로운 기술 스타트업에서 메인 웹 애플리케이션의 아키텍처를 설계하고,
+                        최신 React/Vue 프레임워크와 Canvas 렌더링 최적화를 통해 사용자 경험(UX)을 극대화하는 작업을 진행 중입니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 항목 2 -->
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-date">2025.07 - 2025.12</div>
+                <div class="timeline-content">
+                    <h3>개인 오픈소스 프로젝트 - KLOA Search</h3>
+                    <p>
+                        로스트아크 공식 OpenAPI를 활용하여 전국 상위 랭커들의 캐릭터, 장비, 보석 데이터를 대시보드 형태로 제공하는
+                        멀티서치 웹 애플리케이션을 단독 개발하고 운영했습니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 항목 3 -->
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-date">2022.03 - 2026.02</div>
+                <div class="timeline-content">
+                    <h3>OO대학교 소프트웨어학과 졸업</h3>
+                    <p>
+                        알고리즘, 자료구조, 데이터베이스 등 컴퓨터 공학 기초를 탄탄히 다졌으며,
+                        교내 웹 개발 동아리에서 팀장으로 활동하며 3개의 유의미한 팀 프로젝트 우수상을 수상했습니다.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
